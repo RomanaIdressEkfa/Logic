@@ -12,7 +12,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
     <style>
-        /* --- 1. GLOBAL VARIABLES & RESET --- */
         :root {
             --primary-red: #ef233c;
             --dark-bg: #050505;
@@ -33,87 +32,17 @@
         h1, h2, h3, h4, .brand-font { font-family: 'Space Grotesk', sans-serif; }
         a { text-decoration: none; }
 
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #000; }
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--primary-red); }
 
-        /* --- 2. 3D BACKGROUND --- */
         #canvas-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
             background: radial-gradient(circle at center, #110505 0%, #000000 100%);
         }
 
-        
-
-      .navbar {
-    background: rgba(0, 0, 0, 0.95); /* Deep Black */
-    backdrop-filter: blur(15px); 
-    border-bottom: 1px solid #1f1f1f;
-    padding: 15px 0;
-    transition: all 0.3s;
-    height: 80px;
-}
-
- /* Logo Adjustment */
-#nav-logo {
-    height: 45px;
-    width: auto;
-    object-fit: contain;
-}
-
-
-        
-        .brand-logo { 
-            font-size: 1.5rem; font-weight: 800; color: white; display: flex; align-items: center; gap: 10px;
-        }
-        .brand-icon {
-            width: 35px; height: 35px; background: var(--primary-red); color: white; 
-            display: flex; align-items: center; justify-content: center; 
-            border-radius: 8px; font-size: 1.1rem; transform: skew(-10deg);
-        }
-
-     /* Menu Links (Bold & Centered) */
-.nav-link { 
-    color: #ffffff !important; 
-    font-weight: 800 !important; /* Extra Bold */
-    font-size: 0.9rem;
-    margin: 0 20px; 
-    text-transform: uppercase; /* All Caps */
-    letter-spacing: 1px; 
-    transition: 0.3s;
-    position: relative;
-    font-family: 'Inter', sans-serif;
-}
-
-/* Hover Effect for Menu */
-.nav-link:hover, .nav-link.active { 
-    color: #ef233c !important; 
-}
-
-/* Contact Button (Red Glow - Screenshot Style) */
-.btn-contact-glow {
-    background-color: #ef233c; /* Brand Red */
-    color: white !important;
-    font-weight: 800;
-    font-size: 0.9rem;
-    padding: 12px 30px;
-    border-radius: 50px; /* Pill Shape */
-    border: none;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    box-shadow: 0 4px 20px rgba(239, 35, 60, 0.5); /* The Red Glow */
-    transition: all 0.3s ease;
-}
-
-.btn-contact-glow:hover {
-    background-color: #d90429;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 25px rgba(239, 35, 60, 0.7); /* Stronger Glow on Hover */
-}
-
-        /* --- 4. HERO SECTION --- */
+      
         .hero-section { 
             min-height: 100vh; 
             display: flex; 
@@ -123,7 +52,6 @@
             z-index: 1;
         }
         .hero-title { 
-            /* Responsive Font Size: Min 2.5rem, Preferred 5vw, Max 5rem */
             font-size: clamp(2.5rem, 5vw, 5rem); 
             line-height: 1.1; 
             font-weight: 800; 
@@ -134,7 +62,6 @@
             color: transparent;
         }
         
-        /* Stats Box */
         .stat-box {
             text-align: center; 
             padding: 30px 20px; 
@@ -148,8 +75,6 @@
         .stat-box:hover { border-color: var(--primary-red); transform: translateY(-5px); }
         .stat-number { font-size: clamp(2rem, 3vw, 3.5rem); font-weight: 800; color: white; display: block; }
         .stat-label { color: var(--primary-red); text-transform: uppercase; letter-spacing: 1px; font-size: 0.75rem; font-weight: 700; }
-
-        /* --- 5. CARDS & SECTIONS --- */
         .section-padding { padding: 100px 0; }
         .section-header { margin-bottom: 50px; }
         .section-title { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
@@ -267,36 +192,7 @@
 
     <!-- 3D Background -->
     <div id="canvas-container"></div>
-
-<!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg fixed-top">
-    <div class="container-fluid px-5">
-        
-        <!-- 1. LEFT: Logo -->
-        <a href="{{ route('home') }}" class="brand-logo">
-            <img id="nav-logo" src="https://i.ibb.co.com/gbLB6Dqj/Logo-02.png" alt="Logically Debate">
-        </a>
-
-        <button class="navbar-toggler bg-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="fas fa-bars text-white"></span>
-        </button>
-        
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <!-- 2. MIDDLE: Menu Links (Bold & Centered) -->
-            <ul class="navbar-nav mx-auto align-items-center">
-                <li class="nav-item"><a class="nav-link active" href="{{ route('home') }}">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('debates') }}">Debate Hall</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('leaderboard') }}">Leaderboard</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('community') }}">Community</a></li>
-            </ul>
-
-            <!-- 3. RIGHT: Contact Us (Red Glow Button) -->
-            <div class="d-flex">
-                <a href="{{ route('contact') }}" class="btn-contact-glow">Contact Us</a>
-            </div>
-        </div>
-    </div>
-</nav>
+    @include('frontend.shared.navbar')
 
     <!-- 1. HERO SECTION -->
     <section class="hero-section">
@@ -629,63 +525,7 @@
     </section>
 
     <!-- 8. VIP FOOTER -->
-    <footer>
-        <div class="container">
-            <div class="row pb-5 border-bottom border-dark">
-                <div class="col-lg-4 mb-5 mb-lg-0">
-                    <a class="brand-logo mb-4" href="#">
-                        <div class="brand-icon"><i class="fas fa-bolt"></i></div>
-                        <div>Logically<span class="brand-text-2">Debate</span></div>
-                    </a>
-                    <p class="text-secondary mb-4" style="max-width: 300px;">
-                        The ultimate platform for intellectual sparring. We value truth, logic, and respectful discourse above all else.
-                    </p>
-                    <div class="d-flex gap-2">
-                        <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-btn"><i class="fab fa-discord"></i></a>
-                        <a href="#" class="social-btn"><i class="fab fa-youtube"></i></a>
-                        <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                
-                <div class="col-6 col-lg-2">
-                    <h5 class="footer-heading">Platform</h5>
-                    <a href="#" class="footer-link">Live Hall</a>
-                    <a href="#" class="footer-link">Tournaments</a>
-                    <a href="#" class="footer-link">Leaderboard</a>
-                    <a href="#" class="footer-link">Pricing</a>
-                </div>
-                
-                <div class="col-6 col-lg-2">
-                    <h5 class="footer-heading">Community</h5>
-                    <a href="#" class="footer-link">Rules & Guidelines</a>
-                    <a href="#" class="footer-link">Become a Judge</a>
-                    <a href="#" class="footer-link">Suggestion Box</a>
-                    <a href="#" class="footer-link">Discord Server</a>
-                </div>
-                
-                <div class="col-lg-4 mt-4 mt-lg-0">
-                    <h5 class="footer-heading">Newsletter</h5>
-                    <p class="text-secondary small">Get the latest debate schedules and daily logic puzzles.</p>
-                    <div class="input-group mb-3 mt-3">
-                        <input type="text" class="form-control bg-dark border-secondary text-white" placeholder="Email address">
-                        <button class="btn btn-danger" type="button" style="background: var(--primary-red);">Subscribe</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row pt-4">
-                <div class="col-md-6 text-center text-md-start">
-                    <p class="text-secondary small">&copy; 2026 LogicallyDebate Systems. All rights reserved.</p>
-                </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <a href="#" class="text-secondary small text-decoration-none me-3">Privacy Policy</a>
-                    <a href="#" class="text-secondary small text-decoration-none">Terms of Service</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
+   @include('frontend.shared.footer')
 
     <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

@@ -142,19 +142,7 @@
 <body>
 
     <!-- NAVBAR -->
-    <nav class="navbar-global">
-        <a href="{{ route('home') }}" class="brand">
-            <div class="brand-icon"><i class="fas fa-bolt"></i></div>
-            <div>Logically<span>Debate</span></div>
-        </a>
-        <div class="nav-links">
-            <a href="{{ route('home') }}">Home</a>
-            <a href="{{ route('debates') }}" class="active">Debate Hall</a>
-            <a href="{{ route('leaderboard') }}">Leaderboard</a>
-            <a href="#">Community</a>
-        </div>
-        <a href="#" class="btn btn-sm btn-outline-light rounded-pill px-4">Contact Us</a>
-    </nav>
+    @include('frontend.shared.navbar')
 
     <!-- NEWS TICKER -->
     <div class="news-ticker">
@@ -395,6 +383,8 @@
         </div>
 
     </div>
+
+    @include('frontend.shared.footer')
 
 </body>
 </html>
