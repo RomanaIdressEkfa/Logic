@@ -6,18 +6,23 @@ use App\Http\Controllers\FrontendController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
 Route::controller(FrontendController::class)->group(function () {
     Route::get('/', 'index')->name('home');
     Route::get('/debates', 'debates')->name('debates');
     Route::get('/leaderboard', 'leaderboard')->name('leaderboard');
     Route::get('/community', 'community')->name('community');
     Route::get('/contact', 'contact')->name('contact');
+    
+    Route::get('/login', 'login')->name('login'); 
+    Route::post('/login', 'authenticate')->name('login.submit');
+    
     Route::get('/debate/room', 'room')->name('debate.room');
     Route::get('/create-debate', 'createDebate')->name('debate.create');
+    Route::get('/profile', 'profile')->name('profile');
 });
 
-Route::get('/admin/login', function () { return view('admin.login'); })->name('login');
+
+Route::get('/admin/login', function () { return view('admin.login'); })->name('admin.login');
 
 Route::post('/admin/login', function (Request $request) {
     $credentials = $request->validate([
@@ -29,7 +34,7 @@ Route::post('/admin/login', function (Request $request) {
         return redirect()->intended('admin/dashboard');
     }
     return back()->withErrors([
-        'email' => 'The provided credentials do not match our records.',
+        'email' => 'Invalid admin credentials.',
     ]);
 })->name('admin.authenticate');
 

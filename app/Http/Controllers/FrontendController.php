@@ -3,48 +3,65 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User; // Make sure you import User model
+use Illuminate\Support\Facades\Hash;
 
 class FrontendController extends Controller
 {
-    // Home Page
-    public function index()
+    public function index() { return view('frontend.homepage'); }
+    public function debates() { return view('frontend.debates'); }
+    public function leaderboard() { return view('frontend.leaderboard'); }
+    public function community() { return view('frontend.community'); }
+    public function contact() { return view('frontend.contact'); }
+    public function room() { return view('frontend.room'); }
+    public function createDebate() { return view('frontend.create_debate'); }
+
+    // 1. Show Login Form
+    public function login()
     {
-        return view('frontend.homepage');
+        return view('frontend.login');
+    }
+    public function profile()
+    {
+        $user = Auth::user();
+        return view('frontend.profile', compact('user'));
     }
 
-    // Debates Page
-    public function debates()
+    public function authenticate(Request $request)
     {
-        return view('frontend.debates');
-    }
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:4',
+            'role' => 'required|in:judge,pro_debater,con_debater'
+        ]);
 
-    // Leaderboard Page
-    public function leaderboard()
-    {
-        return view('frontend.leaderboard');
-    }
+        $email = $request->input('email');
+        $password = $request->input('password');
+        $role = $request->input('role');
 
-    // Community Page
-    public function community()
-    {
-        return view('frontend.community');
-    }
+        $user = User::where('email', $email)->first();
 
-    // Contact Page
-    public function contact()
-    {
-        return view('frontend.contact');
-    }
+        if (!$user) {
+            $user = User::create([
+                'name' => explode('@', $email)[0], 
+                'email' => $email,
+                'password' => Hash::make($password),
+                'role' => $role, 
+            ]);
+            
+            Auth::login($user);
+        } else {
+            if (Auth::attempt(['email' => $email, 'password' => $password])) {
+                $user->role = $role;
+                $user->save();
+            } else {
+                return back()->withErrors(['email' => 'Wrong password provided.']);
+            }
+        }
 
-    // Debate Room Page
-    public function room()
-    {
-        return view('frontend.room');
-    }
+        $request->session()->regenerate();
 
-    // Create Debate Page
-    public function createDebate()
-    {
-        return view('frontend.create_debate');
+        return redirect()->route('home')->with('success', "Welcome back! You are logged in as a " . ucfirst(str_replace('_', ' ', $role)));
     }
 }

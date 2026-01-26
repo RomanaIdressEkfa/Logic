@@ -100,21 +100,7 @@
 <body>
 
     <!-- NAVBAR -->
-    <nav class="navbar-global">
-        <a href="{{ route('home') }}" class="brand">
-            <div class="brand-icon"><i class="fas fa-bolt"></i></div>
-            <div>Logically<span>Debate</span></div>
-        </a>
-        <div class="nav-links">
-            <a href="{{ route('home') }}">Home</a>
-            <a href="{{ route('debates') }}">Live Battles</a>
-            <a href="{{ route('debate.create') }}" class="active" style="background:var(--primary-blue); color:white; padding:8px 16px; border-radius:6px;">Create Debate</a>
-            <a href="#">My Profile</a>
-        </div>
-        <div class="d-flex gap-3">
-            <a href="#" class="btn btn-outline-secondary rounded-pill px-4 btn-sm fw-bold"><i class="fas fa-shield-alt"></i> Staff Access</a>
-        </div>
-    </nav>
+   @include('frontend.shared.navbar')
 
     <!-- FORM SECTION -->
     <div class="main-content">
